@@ -2,15 +2,16 @@ import Head from "next/head"
 import Link from "next/link"
 import { Col, Container, Row } from "react-bootstrap"
 import {FaEnvelope, FaLock} from "react-icons/fa"
+import {AiOutlineUser} from "react-icons/ai"
 import AuthImage from "../components/AuthImage"
-import Button from "../components/Button"
 import InputGroups from "../components/InputGroups"
+import Button from "../components/Button"
 
-const login = () => {
+const register = () => {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Register</title>
       </Head>
       <Container fluid>
         <Row>
@@ -34,6 +35,19 @@ const login = () => {
               <form className="mb-4">
                 <div>
                   <InputGroups
+                    icon={<AiOutlineUser />}
+                    name='first_name'
+                    type='text'
+                    required={true}
+                    placeholder = 'Enter your first name'
+                  />
+                  <InputGroups
+                    icon={<AiOutlineUser />}
+                    name='last_name'
+                    type='text'
+                    placeholder = 'Enter your last name'
+                  />
+                  <InputGroups
                     icon={<FaEnvelope />}
                     name='email'
                     type='email'
@@ -48,15 +62,10 @@ const login = () => {
                     placeholder = 'Enter your password'
                   />
                 </div>
-                <div className="mb-4">
-                  <Link href='/reset-password'>
-                    Forgot password?
-                  </Link>
-                </div>
-                <Button type='submit' isBlock={true} variant='primary'>Login</Button>
+                <Button type='submit' isBlock={true} variant='primary'>Sign Up</Button>
               </form>              
               <div>
-                <p>{`Don't have an account? Let's`} <Link href='/register'>Sign Up</Link></p>
+                <p>{`Already have an account? Let's `} <Link href='/login'>Login</Link></p>
               </div>
             </Container>            
           </Col>  
@@ -66,4 +75,4 @@ const login = () => {
   )
 }
 
-export default login
+export default register
