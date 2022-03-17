@@ -1,0 +1,14 @@
+.underline {
+  border: none;
+  border-bottom: 1px solid #393E46;
+  border-radius: unset;
+}
+
+.underline:focus {
+  box-shadow: 0 0 0 0.25rem #393E46;
+  border-color: #393E46;
+}
+
+.inputlabel{
+  background-color: unset;
+}
