@@ -28,7 +28,7 @@ const login = () => {
               </div>
               <div>
                 <p>
-                  Transfering money is eassier than ever, you can access Zwallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!
+                  Transfering money is easier than ever, you can access Next Wallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!
                 </p>
               </div>
               <form className="mb-4">
