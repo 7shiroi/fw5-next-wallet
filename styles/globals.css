@@ -3,7 +3,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Nunito Sans', sans-serif !important;
-  background-color: #E5E5E5;
+  background-color: #E5E5E5 !important;
 }
 
 a {
@@ -13,4 +13,9 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.primary-bg {
+  background-color: #222831 !important;
+  color: white !important;
 }
