@@ -19,13 +19,13 @@ const MenuBar = () => {
     {name: 'Profile', url: '/profile', icon: AiOutlineUser },
   ]
   return (
-    <div className={`${MenuBarStyle.menu} d-flex flex-column justify-content-between`}>
+    <div className={`${MenuBarStyle.menu} d-flex flex-column justify-content-between py-4 h-100`}>
       <div>
         {navigation.map((obj, idx) => {
           const Icon = obj.icon
           return (
             <Link key={idx} href={obj.url} passHref>
-              <div className={`${MenuBarStyle.menu_items} mb-4 ${active===obj.url ? MenuBarStyle.active : ''} `}>
+              <div className={`${MenuBarStyle.menu_items} mb-4 ps-4 ${active===obj.url ? MenuBarStyle.active : ''} `}>
                 <Icon className='me-4'/>
                 {obj.name}
               </div>
@@ -36,7 +36,7 @@ const MenuBar = () => {
       </div>
       <div>
         <Link href='/logout' passHref>
-          <div className={`${MenuBarStyle.menu_items}`}>
+          <div className={`${MenuBarStyle.menu_items} ps-4`}>
             <ImExit className='me-4' />
             Logout
           </div>
