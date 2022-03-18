@@ -12,3 +12,8 @@
 .inputlabel{
   background-color: unset;
 }
+
+.transparent {
+  border: none;
+  background-color: #3A3D421A;
+}
