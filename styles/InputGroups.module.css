@@ -1,11 +1,13 @@
 .underline {
+  background-color: unset;
   border: none;
   border-bottom: 1px solid #393E46;
   border-radius: unset;
 }
 
 .underline:focus {
-  box-shadow: 0 0 0 0.25rem #393E46;
+  background-color: unset;
+  box-shadow: 0 0 0 0.1rem #393E46;
   border-color: #393E46;
 }
 
@@ -16,4 +18,12 @@
 .transparent {
   border: none;
   background-color: #3A3D421A;
+}
+
+.underline.invalid {
+  border-color: #FF5B37;
+}
+
+span.underline.invalid {
+  color: #FF5B37;
 }

@@ -1,22 +1,24 @@
-import React, { Component } from 'react'
+import React from 'react'
 import OtpInput from 'react-otp-input'
+import { useDispatch, useSelector } from 'react-redux';
 import PinInputStyle from '../styles/PinInput.module.css'
 
-export default class PinInput extends Component {
-  state = { otp: '' };
+const PinInput = () => {
+  const otp = useSelector(state => state.otp);
+  const dispatch = useDispatch()
 
-  handleChange = (otp) => this.setState({ otp });
-
-  render() {
-    return (
-      <OtpInput 
-        value={this.state.otp}
-        onChange={this.handleChange}
-        numInputs={6}
-        isInputNum={true}
-        containerStyle={PinInputStyle.pin_container}
-        inputStyle={PinInputStyle.pin_input}
-      />
-    )
-  }
+  const handleChange = (otp) => dispatch({ type: 'UPDATE_OTP', payload:{otp} });
+  return (
+    <OtpInput 
+      value={otp.otp}
+      onChange={handleChange}
+      numInputs={6}
+      isInputNum={true}
+      containerStyle={PinInputStyle.pin_container}
+      inputStyle={PinInputStyle.pin_input}
+    />
+  )
 }
+
+
+export default PinInput
