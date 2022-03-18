@@ -19,7 +19,7 @@ const MenuBar = () => {
     {name: 'Profile', url: '/profile', icon: AiOutlineUser },
   ]
   return (
-    <div className={`${MenuBarStyle.menu} d-flex flex-column justify-content-between py-4`}>
+    <div className={`${MenuBarStyle.menu} d-flex flex-column justify-content-between py-4 h-100`}>
       <div>
         {navigation.map((obj, idx) => {
           const Icon = obj.icon

@@ -19,3 +19,16 @@ a {
   background-color: #222831 !important;
   color: white !important;
 }
+
+.white-bg {
+  background-color: #fff !important;
+  color: black
+}
+
+.round-container {
+  border-radius: 20px;
+}
+
+small {
+  color: #7A7886;
+}
