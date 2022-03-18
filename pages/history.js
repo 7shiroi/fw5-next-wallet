@@ -7,7 +7,6 @@ import Layout from '../components/Layout'
 const history = () => {
   return (
     <Layout>
-      
       <Head>
         <title>History</title>
         <meta name="description" content="Next Wallet your future wallet" />
