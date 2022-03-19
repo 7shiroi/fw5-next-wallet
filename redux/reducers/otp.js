@@ -8,6 +8,10 @@ const otp = (state=initialState, action) => {
       state.otp = action.payload.otp
       return {...state}
     }
+    case 'RESET_OTP':{
+      state = initialState
+      return {...state}
+    }
     default: {
       return {...state}
     }

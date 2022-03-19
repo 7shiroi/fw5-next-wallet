@@ -15,12 +15,13 @@ const register = (state=initialState, action) => {
     case 'REGISTER_USER_FULFILLED': {
       const {data} = action.payload
       state.isLoading = false
-      message = data.message
+      state.message = data.message
       return {...state}
     }
     case 'REGISTER_USER_REJECTED': {
+      const {data} = action.payload
       state.isLoading = false
-      message = data.message
+      state.message = data.message
       return {...state}
     }
     case 'VALIDATE_USER_DATA':{

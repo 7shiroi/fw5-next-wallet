@@ -14,8 +14,7 @@ const create_pin = () => {
   const otp = useSelector(state => state.otp.otp)
   const router = useRouter()
   const dispatch = useDispatch()
-  const [error, setError] = useState(null)
-  
+
   useEffect(() => {
     if(otp.length < 6){
       document.getElementById("confirmButton").disabled = true;
@@ -28,12 +27,16 @@ const create_pin = () => {
     e.preventDefault()
     dispatch({type: 'ADD_PIN', payload:{pin:otp}})
     await dispatch(registerUser(registerState.userData))
-    if(registerState.message === "Register failed") {
-      setError(true)
-    }else{
-      setError(false)
-    }
   } 
+
+  const handleRetry = () => {
+    router.push('/register')
+    dispatch({type: 'RESET_OTP'})
+  }
+  const handleGoToLogin = () => {
+    router.push('/login')
+    dispatch({type: 'RESET_OTP'})
+  }
 
   return (
     <>
@@ -47,7 +50,7 @@ const create_pin = () => {
           </Col>
           <Col lg={6}>
             <Container className="d-flex flex-column justify-content-center h-lg-100 vh-100">
-              {error===null && 
+              {registerState.message==='' && 
                 <>
                   <div>
                     <h2>
@@ -70,7 +73,7 @@ const create_pin = () => {
                 </>
               }
               {
-                error===true && 
+                registerState.message==='Register failed' && 
                 <>
                   <div>
                     <h2 className="error-message">
@@ -82,11 +85,11 @@ const create_pin = () => {
                       Something was wrong during your registration process. Please try to do registration again to have all access to our features in Next Wallet!
                     </p>
                   </div>
-                  <Link href='/register' passHref><Button isBlock={true} variant='primary'>Retry</Button></Link>
+                  <Button isBlock={true} variant='primary' onClick={handleRetry}>Retry</Button>
                 </>
               }
               {
-                error===false && 
+                registerState.message==='Register success' && 
                 <>
                   <div>
                     <h2>
@@ -98,7 +101,7 @@ const create_pin = () => {
                       Your PIN was successfully created and you can now access all the features in Next Wallet. Login to your new account and start exploring!
                     </p>
                   </div>
-                  <Link href='/login' passHref><Button isBlock={true} variant='primary'>Login Now</Button></Link>
+                  <Button isBlock={true} variant='primary' onClick={handleGoToLogin}>Login Now</Button>
                 </>
               }
             </Container>            
