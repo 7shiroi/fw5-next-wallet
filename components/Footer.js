@@ -8,7 +8,7 @@ const Footer = () => {
       <Container className='py-3'>
         <div className='d-flex flex-column flex-md-row justify-content-between'>
           <div className='order-3 order-md-1'>
-            2020 Zwallet. All right reserved.
+            2022 Next Wallet. All right reserved.
           </div>
           <div className='d-flex flex-column flex-md-row justify-content-end align-items-md-center align-items-end order-2'>
             <div className='me-md-5'>
@@ -18,7 +18,7 @@ const Footer = () => {
             </div>
             <div>
               <strong>
-                contact@zwallet.com
+                contact@nextwallet.com
               </strong>
             </div>
           </div>

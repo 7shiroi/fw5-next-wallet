@@ -1,16 +1,16 @@
 import React from 'react'
 import {Button as BsButton} from 'react-bootstrap'
 
-const Button = ({isBlock=false, variant, children, ...rest}) => {
+const Button = ({isBlock=false, children, ...rest}) => {
   return (
     <>
       {isBlock && <div className='d-grid'>
-        <BsButton variant={variant} {...rest}>
+        <BsButton {...rest}>
           {children}
         </BsButton>
       </div>}
       {!isBlock && 
-        <BsButton variant={variant} {...rest}>
+        <BsButton {...rest}>
           {children}
         </BsButton>}
     </>

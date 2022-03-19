@@ -4,6 +4,9 @@ const nextConfig = {
   env: {
     BACKEND_URL: 'https://fw5-zwallet.herokuapp.com',
   },
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
 }
 
 module.exports = nextConfig

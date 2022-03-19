@@ -13,7 +13,7 @@ const Layout = ({children}) => {
           <Col md={3}>
             <MenuBar />
           </Col>
-          <Col md={9}>
+          <Col md={9} className='mt-3 mt-md-0'>
             {children}
           </Col>
         </Row>
