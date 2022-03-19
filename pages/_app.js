@@ -8,6 +8,7 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     import('bootstrap/dist/js/bootstrap.bundle')
   }, [])
+
   return (
     <Provider store={store}>
       <Component {...pageProps} />

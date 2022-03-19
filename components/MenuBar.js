@@ -5,10 +5,13 @@ import {BsArrowUp, BsPlusLg, BsGrid} from 'react-icons/bs'
 import {AiOutlineUser} from 'react-icons/ai'
 import {ImExit} from 'react-icons/im'
 import MenuBarStyle from '../styles/MenuBar.module.css'
+import { useDispatch } from 'react-redux'
 
 const MenuBar = () => {
   const route = useRouter()
   const [active, setActive] = useState('/')
+  const dispatch = useDispatch()
+
   useEffect(() => {
     setActive(route.pathname)
   }, [route.pathname])
@@ -18,6 +21,11 @@ const MenuBar = () => {
     {name: 'Top Up', url: '/topup', icon: BsPlusLg },
     {name: 'Profile', url: '/profile', icon: AiOutlineUser },
   ]
+
+  const handleLogout = () => {
+    dispatch({type: 'AUTH_LOGOUT'})
+  }
+
   return (
     <div className={`${MenuBarStyle.menu} d-flex flex-column justify-content-between py-4 h-100`}>
       <div>
@@ -35,12 +43,12 @@ const MenuBar = () => {
 
       </div>
       <div>
-        <Link href='/logout' passHref>
+        <a onClick={handleLogout}>
           <div className={`${MenuBarStyle.menu_items} ps-4`}>
             <ImExit className='me-4' />
             Logout
           </div>
-        </Link>
+        </a>
       </div>
     </div>
   )

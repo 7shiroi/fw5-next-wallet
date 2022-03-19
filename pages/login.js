@@ -1,12 +1,46 @@
 import Head from "next/head"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import {FaEnvelope, FaLock} from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux"
 import AuthImage from "../components/AuthImage"
 import Button from "../components/Button"
 import InputGroups from "../components/InputGroups"
+import { loginAction } from "../redux/actions/auth"
+import { useRouter } from "next/router"
 
 const login = () => {
+  const [invalidCredential, setInvalidCredential] = useState()
+  const auth = useSelector(state => state.auth)
+  const dispatch = useDispatch()
+  const router = useRouter()
+
+  const handleLogin = async (e) => {
+    e.preventDefault()
+    dispatch({type: "RESET_AUTH_STATE"})
+    const data = {
+      email: e.target.elements['email'].value,
+      password: e.target.elements['password'].value,
+    }
+    await dispatch(loginAction(data))
+  }
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('token')
+    if (token) {
+      router.push('/')
+      dispatch({
+        type: "AUTH_LOGIN_FULFILLED",
+        payload: {
+          data: {
+            results: token
+          }
+        }
+      })
+    }
+  }, [dispatch, auth.token])
+  
   return (
     <>
       <Head>
@@ -31,13 +65,14 @@ const login = () => {
                   Transfering money is easier than ever, you can access Next Wallet wherever you are. Desktop, laptop, mobile phone? we cover all of that for you!
                 </p>
               </div>
-              <form className="mb-4">
+              <form className="mb-4" onSubmit={handleLogin}>
                 <div>
                   <InputGroups
                     icon={<FaEnvelope />}
                     name='email'
                     type='email'
                     required={true}
+                    invalid={auth?.message === 'Wrong credentials'}
                     placeholder = 'Enter your email'
                   />
                   <InputGroups
@@ -45,6 +80,7 @@ const login = () => {
                     name='password'
                     type='password'
                     required={true}
+                    invalid={auth?.message === 'Wrong credentials'}
                     placeholder = 'Enter your password'
                   />
                 </div>
@@ -53,6 +89,12 @@ const login = () => {
                     Forgot password?
                   </Link>
                 </div>
+                {
+                  auth?.message === 'Wrong credentials' &&
+                  <div className="error-message text-center mb-4">
+                    {auth?.message}
+                  </div>
+                }
                 <Button type='submit' isBlock={true} variant='primary'>Login</Button>
               </form>              
               <div>
