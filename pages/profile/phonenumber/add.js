@@ -15,7 +15,7 @@ const add = () => {
     
     const token = window.localStorage.getItem('token')
     const data = new URLSearchParams()
-    data.append('number', `+62 ${e.target.elements['number'].value}`)
+    data.append('number', `0${e.target.elements['number'].value}`)
     const addPhoneNumber = await http(token).post('/profile/phones',data);
     if(addPhoneNumber.data.message === "Phone added!"){
       setStatus("added")

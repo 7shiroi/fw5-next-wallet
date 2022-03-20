@@ -6,15 +6,25 @@ import {FiTrash} from 'react-icons/fi'
 import Button from '../../components/Button'
 import Link from 'next/link'
 import { getPhoneNumbers } from '../../redux/actions/profile'
+import http from '../../helpers/http'
 
 const phonenumber = () => {
   const profile = useSelector(state => state.profile)
   const dispatch = useDispatch()
   
-  useEffect(() => {
+  // useEffect(() => {
+    // const token = window.localStorage.getItem('token')
+    // dispatch(getPhoneNumbers(token))
+  // }, [])
+
+  const handleDelete = async (e) => {
+    e.preventDefault()
     const token = window.localStorage.getItem('token')
-    dispatch(getPhoneNumbers(token))
-  }, [])
+    const id = e.target.previousElementSibling.value
+    
+    await http(token).delete(`/profile/phones/${id}`)
+    await dispatch(getPhoneNumbers(token))
+  }
 
   return (
     <Layout>
@@ -34,13 +44,16 @@ const phonenumber = () => {
             return (
               <div key={idx} className='d-flex justify-content-between shadow-sm py-2 px-4 mb-4 round-container'>
                 <div>
-                  <small>Primary</small>
+                  {idx === profile.phoneNumber.length - 1 &&
+                    <small>Primary</small>
+                  }
                   <h5>
-                    {obj.number}
+                    {obj}
                   </h5>
                 </div>
-                <div className='d-flex align-items-center'>            
-                  <FiTrash color='#BBBBBE' size={20} />
+                <div>    
+                  <input type='hidden' name='phoneNumberId' value={profile.phoneNumberId[idx]} />        
+                  <FiTrash className='d-flex align-items-center important' onClick={handleDelete} color='#BBBBBE' size={20} />
                 </div>
               </div>
             )
@@ -55,7 +68,7 @@ const phonenumber = () => {
 
 
         <div>
-          <Link href='/profile/phonenumber/add' passhref>
+          <Link href='/profile/phonenumber/add' passHref>
             <Button variant='primary' isBlock={true}>Add Phone Number</Button>
           </Link>
         </div>

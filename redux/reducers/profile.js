@@ -1,6 +1,7 @@
 const initialState = {
   profileData: {},
   phoneNumber: [],
+  phoneNumberId: [],
   isLoading: false,
   error: [],
   message: '',
@@ -29,6 +30,8 @@ const profile = (state=initialState, action) => {
     case 'GET_PHONE_NUMBER_PENDING': {
       state.isLoading = true;
       state.error = []
+      state.phoneNumber = []
+      state.phoneNumberId = []
       state.message = ""
       return {...state}
     }
@@ -36,7 +39,14 @@ const profile = (state=initialState, action) => {
       const {data} = action.payload
       state.isLoading = false;
       state.message = data.message
-      state.phoneNumber = data.results
+      data.results.forEach(obj => {
+        state.phoneNumber.push(obj.number)
+      });
+      data.results.forEach(obj => {
+        state.phoneNumberId.push(obj.id)
+      });
+      console.log('after',state.phoneNumber)
+      
       return {...state}
     }
     case 'GET_PHONE_NUMBER_REJECTED': {
