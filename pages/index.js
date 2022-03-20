@@ -6,8 +6,14 @@ import {AiOutlineArrowUp, AiOutlineArrowDown} from 'react-icons/ai'
 import BarChart from '../components/BarChart'
 import HistoryDashboard from '../components/HistoryDashboard'
 import Layout from '../components/Layout'
+import { useSelector } from 'react-redux'
+import TopUpModal from '../components/TopUpModal'
+import { useState } from 'react'
 
 export default function Home() {
+  const profile = useSelector(state => state.profile)
+  const [modalShow, setModalShow] = useState(false);
+
   return (
     <Layout>
       <Head>
@@ -16,24 +22,35 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
+      <TopUpModal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+      />
+
       <Row>
         <Container className='d-flex flex-column flex-sm-row justify-content-between primary-bg round-container'>
           <div className='d-flex flex-column justify-content-around py-4'>
             <div>
               Balance
             </div>
-            <h1>
-              Rp. {Number(120000).toLocaleString('id-ID')}
-            </h1>
-            <div>
-              +62 813-9387-7946
-            </div>
+            {
+              profile.balance &&
+              <h1>
+                Rp. {Number(profile.balance).toLocaleString('id-ID')}
+              </h1>
+            }
+            {
+              profile.phoneNumber.length > 0 &&
+              <div>
+                {profile.phoneNumber[profile.phoneNumber.length - 1]}
+              </div>
+            }
           </div>
           <div className='d-flex flex-row flex-sm-column justify-content-around pb-4 pb-sm-0'>
             <Button variant="primary">
               <AiOutlineArrowUp /> Transfer
             </Button>
-            <Button variant="primary">
+            <Button variant="primary" onClick={() => setModalShow(true)}>
               <BsPlusLg /> Top Up
             </Button>
           </div>

@@ -4,7 +4,7 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 import {AiOutlineBell} from 'react-icons/ai'
 import Image from 'next/image'
 import { useDispatch, useSelector } from "react-redux"
-import { getPhoneNumbers, getProfile } from '../redux/actions/profile'
+import { getBalance, getPhoneNumbers, getProfile } from '../redux/actions/profile'
 
 const NavbarComponent = () => {
   const dispatch = useDispatch()
@@ -14,6 +14,7 @@ const NavbarComponent = () => {
     const token = window.localStorage.getItem('token')
     dispatch(getProfile(token))
     dispatch(getPhoneNumbers(token))
+    dispatch(getBalance(token))
   },[])
 
   return (
