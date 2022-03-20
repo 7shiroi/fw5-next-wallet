@@ -1,0 +1,29 @@
+.underline {
+  background-color: unset;
+  border: none;
+  border-bottom: 1px solid #393E46;
+  border-radius: unset;
+}
+
+.underline:focus {
+  background-color: unset;
+  box-shadow: 0 0 0 0.1rem #393E46;
+  border-color: #393E46;
+}
+
+.inputlabel{
+  background-color: unset;
+}
+
+.transparent {
+  border: none;
+  background-color: #3A3D421A;
+}
+
+.underline.invalid {
+  border-color: #FF5B37;
+}
+
+span.underline.invalid {
+  color: #FF5B37;
+}

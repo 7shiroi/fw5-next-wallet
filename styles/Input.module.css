@@ -1,0 +1,8 @@
+.underline {
+  border: none;
+  border-bottom: 1px solid #A9A9A966;
+}
+
+.invalid {
+  border-color: #FF5B37;
+}
