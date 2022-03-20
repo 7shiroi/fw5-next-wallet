@@ -1,16 +1,17 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Modal } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import http from "../helpers/http"
-import { getBalance } from "../redux/actions/profile"
 import Button from "./Button"
-import Input from "./Input"
 import PinInput from "./PinInput"
+import { useRouter } from 'next/router'
 
 const PinModal = (props) => {
-  const otp = useSelector(state => state.otp)
   const transfer = useSelector(state => state.transfer)
+  const otp = useSelector(state => state.otp)
   const dispatch = useDispatch()
+  const router = useRouter()
+  const [isError, setIsError] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -18,14 +19,18 @@ const PinModal = (props) => {
     const token = window.localStorage.getItem('token')
     data.append('amount', transfer.transferData.amount)
     data.append('recipient', transfer.transferData.id)
-    data.append('pin', otp)
+    data.append('pin', otp.otp)
     if(transfer.transferData.notes){
       data.append('notes', transfer.transferData.notes)
     }
-    const transfer = await http(token).post('/transactions/transfer', data)
-    console.log(transfer)
+    const transferRequest = await http(token).post('/transactions/transfer', data).data
+    console.log(transferRequest)
     dispatch({type: "RESET_OTP"})
-    // props.onHide()
+    if(transferRequest.status >= 400){
+      setIsError(true)
+    }else{
+      router.push('/')
+    }
   }
 
   return (
