@@ -24,9 +24,17 @@ a {
   background-color: #fff !important;
   color: black
 }
+.grey-bg {
+  background-color: #eeeeee !important;
+  color: black !important;
+}
 
 .round-container {
   border-radius: 20px;
+}
+
+.circle-container{
+  border-radius: 50%;
 }
 
 small {
@@ -52,4 +60,18 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.primary-text{
+  color: #222831;
+}
+.secondary-text{
+  color: #7A7886;
+}
+.accent-text{
+  color: #00ADB5;
+}
+
+.white-line{
+  border: 1px solid white;
 }
