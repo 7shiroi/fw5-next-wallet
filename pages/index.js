@@ -34,7 +34,7 @@ export default function Home() {
               Balance
             </div>
             {
-              profile.balance &&
+              profile.balance >= 0 &&
               <h1>
                 Rp. {Number(profile.balance).toLocaleString('id-ID')}
               </h1>
