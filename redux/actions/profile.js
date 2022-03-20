@@ -13,3 +13,10 @@ export const getPhoneNumbers = (token) => {
     payload: http(token).get('/profile/phones')
   }
 }
+
+export const getBalance = (token) => {
+  return {
+    type: 'GET_BALANCE',
+    payload: http(token).get('/profile/balance')
+  }
+}

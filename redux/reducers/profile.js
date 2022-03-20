@@ -2,6 +2,7 @@ const initialState = {
   profileData: {},
   phoneNumber: [],
   phoneNumberId: [],
+  balance: 0,
   isLoading: false,
   error: [],
   message: '',
@@ -50,6 +51,27 @@ const profile = (state=initialState, action) => {
       return {...state}
     }
     case 'GET_PHONE_NUMBER_REJECTED': {
+      const {data} = action.payload
+      state.isLoading = false;
+      state.message = data.message
+      return {...state}
+    }
+    case 'GET_BALANCE_PENDING': {
+      state.isLoading = true;
+      state.error = []
+      state.balance = 0
+      state.message = ""
+      return {...state}
+    }
+    case 'GET_BALANCE_FULFILLED': {
+      const {data} = action.payload
+      state.isLoading = false;
+      state.message = data.message
+      state.balance = data.results
+      return {...state}
+    }
+    case 'GET_BALANCE_REJECTED': {
+      const {data} = action.payload
       state.isLoading = false;
       state.message = data.message
       return {...state}
