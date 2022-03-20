@@ -36,3 +36,7 @@ small {
 .error-message {
   color: #FF5B37;
 }
+
+.important {
+  cursor: pointer;
+}
