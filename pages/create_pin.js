@@ -17,9 +17,13 @@ const create_pin = () => {
 
   useEffect(() => {
     if(otp.length < 6){
-      document.getElementById("confirmButton").disabled = true;
+      if(registerState.message === ''){
+        document.getElementById("confirmButton").disabled = true;
+      }
     }else {
-      document.getElementById("confirmButton").disabled = false;
+      if(registerState.message === ''){
+        document.getElementById("confirmButton").disabled = false;
+      }
     }
   }, [otp])
 

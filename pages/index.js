@@ -6,7 +6,7 @@ import {AiOutlineArrowUp, AiOutlineArrowDown} from 'react-icons/ai'
 import BarChart from '../components/BarChart'
 import HistoryDashboard from '../components/HistoryDashboard'
 import Layout from '../components/Layout'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import TopUpModal from '../components/TopUpModal'
 import { useEffect, useState } from 'react'
 import {AiOutlinePhone,AiOutlineDownload} from 'react-icons/ai'
@@ -15,16 +15,17 @@ import {TiVendorMicrosoft} from 'react-icons/ti'
 import {FaDropbox, FaAirbnb, FaGooglePlay} from 'react-icons/fa'
 import {SiDell, SiApple} from 'react-icons/si'
 import Link from 'next/link'
+import { getHistories } from '../redux/actions/history'
 
 
 export default function Home() {
+  const history = useSelector(state => state.history)
   const profile = useSelector(state => state.profile)
   const [modalShow, setModalShow] = useState(false);
   const [token, setToken] = useState(null)
 
   useEffect(() => {
-  setToken(window.localStorage.getItem('token'))
-
+    setToken(window.localStorage.getItem('token'))
   },[])
 
   return (
@@ -216,9 +217,11 @@ export default function Home() {
                 }
               </div>
               <div className='d-flex flex-row flex-sm-column justify-content-around pb-4 pb-sm-0'>
-                <Button variant="primary">
-                  <AiOutlineArrowUp /> Transfer
-                </Button>
+                <Link href='/transfer' passHref>
+                  <Button variant="primary">
+                    <AiOutlineArrowUp /> Transfer
+                  </Button>
+                </Link>
                 <Button variant="primary" onClick={() => setModalShow(true)}>
                   <BsPlusLg /> Top Up
                 </Button>
@@ -241,15 +244,33 @@ export default function Home() {
               </div>
               <BarChart />
             </Col>
-            <Col lg={5} className='round-container white-bg py-3 my-3'>
-              <div className='d-flex flex-column justify-content-around h-100'>
-                <h4 className='my-4'>Transaction History</h4>
-                <HistoryDashboard image="/images/profile.png" name="Samuel Suhi" type="Accept" nominal={50000} />
-                <HistoryDashboard image="/images/profile.png" name="Netflix" type="Transfer" nominal={149000} />
-                <HistoryDashboard image="/images/profile.png" name="Christine something really long" type="Accept" nominal={15000} />
-                <HistoryDashboard image="/images/profile.png" name="Roberto Chandler" type="Top Up" nominal={249000} />
-              </div>
-            </Col>
+            <Link href='/history' passHref>
+              <Col lg={5} className='round-container white-bg py-3 my-3 important'>
+                <div className='d-flex flex-column justify-content-around h-100'>
+                  <h4 className='my-4'>Transaction History</h4>
+                  {
+                    history.historiesData.length > 0 &&
+                    history.historiesData.map((obj, idx)=>{
+                      return (
+                        <HistoryDashboard 
+                          key = {idx}
+                          image ='/images/noprofilepicture.png'
+                          name = {obj.mutation_type.id === 3 && obj.anotherUserId === profile.profileData.id ? obj.userId : obj.anotherUserId }
+                          type = {obj.mutation_type.id === 3 && obj.anotherUserId === profile.profileData.id ? 'Accept' : obj.mutation_type.name}
+                          nominal = {obj.amount}
+                        />
+                      )
+                    })
+                  }
+                  {
+                    history.historiesData.length === 0 &&
+                    <h4>
+                      {`You haven't made any transaction yet!`}
+                    </h4>
+                  }
+                </div>
+              </Col>
+            </Link>
           </Row>
         </Layout>
       }

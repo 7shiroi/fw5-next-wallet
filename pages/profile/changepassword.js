@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container } from 'react-bootstrap'
 import Layout from '../../components/Layout'
 import {FaLock} from "react-icons/fa"
 import InputGroups from '../../components/InputGroups'
 import Button from '../../components/Button'
+import http from '../../helpers/http'
 
 const changepassword = () => {
+  const [status, setStatus] = useState('input') //input, success, failed
+  const [errorMsg, setErrorMsg] = useState('')
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    
+    const token = window.localStorage.getItem('token')
+    const data = new URLSearchParams()
+    data.append('oldPassword', e.target.elements['curPassword'].value)
+    data.append('newPassword', e.target.elements['newPassword'].value)
+    data.append('confirmPassword', e.target.elements['confirmPassword'].value)
+
+    const request = await http(token).patch('/profile/change-password', data, {
+      validateStatus: (status) =>{
+        return status < 400
+      }
+    }).catch((error)=>{
+      setStatus('failed')
+      setErrorMsg(error.response.data.message)
+    })
+    if(request && request.status === 200){
+      setStatus('success')
+    }
   }
   return (
     <Layout>
@@ -54,6 +73,14 @@ const changepassword = () => {
           </div>
           <Button isBlock={true} type='submit'>Change Password</Button>
         </form>
+        {
+          status === 'success' &&
+          <h3 className='text-center mt-4'>Your password has been updated!</h3>
+        }
+        {
+          status === 'failed' &&
+          <h3 className='error-message text-center mt-4'>{errorMsg}</h3>
+        }
       </Container>
     </Layout>
   )
