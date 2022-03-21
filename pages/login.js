@@ -85,7 +85,7 @@ const login = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <Link href='/reset-password'>
+                  <Link href='/forgot-password'>
                     Forgot password?
                   </Link>
                 </div>
