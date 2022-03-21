@@ -81,10 +81,12 @@ import Link from 'next/link'
               <div><AiOutlineArrowRight /></div>
             </Button>
           </Link>
-          <Button isBlock={true} variant='secondary' className={`d-flex justify-content-between mb-3 ${ButtonStyles.transparent}`}>
-            <div>Change Pin</div>
-            <div><AiOutlineArrowRight /></div>
-          </Button>
+          <Link href='profile/changepin' passHref>
+            <Button isBlock={true} variant='secondary' className={`d-flex justify-content-between mb-3 ${ButtonStyles.transparent}`}>
+              <div>Change Pin</div>
+              <div><AiOutlineArrowRight /></div>
+            </Button>
+          </Link>
           <Button isBlock={true} variant='secondary' className={`d-flex justify-content-between ${ButtonStyles.transparent}`}>
             <div>Logout</div>
           </Button>
