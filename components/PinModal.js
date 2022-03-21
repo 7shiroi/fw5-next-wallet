@@ -23,12 +23,12 @@ const PinModal = (props) => {
     if(transfer.transferData.notes){
       data.append('notes', transfer.transferData.notes)
     }
-    const transferRequest = await http(token).post('/transactions/transfer', data).data
-    console.log(transferRequest)
+    const transferRequest = await http(token).post('/transactions/transfer', data)
+      .catch((error) => {
+        setIsError(true)
+      })
     dispatch({type: "RESET_OTP"})
-    if(transferRequest.status >= 400){
-      setIsError(true)
-    }else{
+    if(transferRequest){
       router.push('/')
     }
   }
@@ -40,6 +40,7 @@ const PinModal = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
+      {console.log(isError)}
       <Modal.Header closeButton>
       </Modal.Header>
       <Modal.Body>
@@ -52,7 +53,7 @@ const PinModal = (props) => {
             <PinInput/>
           </div>
           {
-            transfer.message === 'Wrong PIN!'&&
+            isError &&
             <div className="error-message">
               <strong>{transfer.message}</strong>
             </div>
