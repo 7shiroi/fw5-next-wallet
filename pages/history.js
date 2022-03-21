@@ -3,18 +3,11 @@ import Head from 'next/head'
 import { Container, Form, Row } from 'react-bootstrap'
 import HistoryDashboard from '../components/HistoryDashboard'
 import Layout from '../components/Layout'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { getHistories } from '../redux/actions/history'
 
 const history = () => {
   const history = useSelector(state => state.history)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    const token = window.localStorage.getItem('token')
-    dispatch(getHistories(token))
-  }, [])
-
 
   return (
     <Layout>

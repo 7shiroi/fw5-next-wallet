@@ -1,6 +1,7 @@
 import { Modal } from "react-bootstrap"
 import { useDispatch } from "react-redux"
 import http from "../helpers/http"
+import { getHistories } from "../redux/actions/history"
 import { getBalance } from "../redux/actions/profile"
 import Button from "./Button"
 import Input from "./Input"
@@ -14,6 +15,7 @@ const TopUpModal = (props) => {
     data.append('amount', e.target.elements['amount'].value)
     await http(token).post('/transactions/topup', data)
     await dispatch(getBalance(token))
+    await dispatch(getHistories(token))
     props.onHide()
   }
 

@@ -23,7 +23,7 @@ const history = (state=initialState, action) => {
       const {data} = action.payload
       state.isLoading = false
       state.error = true
-      state.message = data.message
+      // state.message = data.message
       return {...state}
     }
     case 'RESET_HISTORY_STATE':{

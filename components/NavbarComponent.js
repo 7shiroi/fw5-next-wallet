@@ -5,6 +5,7 @@ import {AiOutlineBell} from 'react-icons/ai'
 import Image from 'next/image'
 import { useDispatch, useSelector } from "react-redux"
 import { getBalance, getPhoneNumbers, getProfile } from '../redux/actions/profile'
+import { getHistories } from '../redux/actions/history'
 
 const NavbarComponent = () => {
   const dispatch = useDispatch()
@@ -15,6 +16,7 @@ const NavbarComponent = () => {
     dispatch(getProfile(token))
     dispatch(getPhoneNumbers(token))
     dispatch(getBalance(token))
+    dispatch(getHistories(token))
   },[])
 
   return (

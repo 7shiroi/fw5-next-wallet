@@ -23,11 +23,9 @@ export default function Home() {
   const profile = useSelector(state => state.profile)
   const [modalShow, setModalShow] = useState(false);
   const [token, setToken] = useState(null)
-  const dispatch = useDispatch()
 
   useEffect(() => {
-  setToken(window.localStorage.getItem('token'))
-  dispatch(getHistories(token))
+    setToken(window.localStorage.getItem('token'))
   },[])
 
   return (
