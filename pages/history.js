@@ -8,6 +8,7 @@ import { getHistories } from '../redux/actions/history'
 
 const history = () => {
   const history = useSelector(state => state.history)
+  const profile = useSelector(state => state.profile)
 
   return (
     <Layout>
@@ -29,12 +30,13 @@ const history = () => {
         {
           history.historiesData.length > 0 &&
           history.historiesData.map((obj, idx)=>{
+            
             return (
               <HistoryDashboard 
                 key = {idx}
                 image ='/images/noprofilepicture.png'
-                name = {obj.anotherUserId}
-                type = {obj.mutation_type.name}
+                name = {obj.mutation_type.id === 3 && obj.anotherUserId === profile.profileData.id ? obj.userId : obj.anotherUserId }
+                type = {obj.mutation_type.id === 3 && obj.anotherUserId === profile.profileData.id ? 'Accept' : obj.mutation_type.name}
                 nominal = {obj.amount}
               />
             )

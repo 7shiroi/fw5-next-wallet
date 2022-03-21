@@ -255,8 +255,8 @@ export default function Home() {
                         <HistoryDashboard 
                           key = {idx}
                           image ='/images/noprofilepicture.png'
-                          name = {obj.anotherUserId}
-                          type = {obj.mutation_type.name}
+                          name = {obj.mutation_type.id === 3 && obj.anotherUserId === profile.profileData.id ? obj.userId : obj.anotherUserId }
+                          type = {obj.mutation_type.id === 3 && obj.anotherUserId === profile.profileData.id ? 'Accept' : obj.mutation_type.name}
                           nominal = {obj.amount}
                         />
                       )
