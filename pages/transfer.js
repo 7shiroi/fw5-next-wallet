@@ -16,6 +16,7 @@ import { useRouter } from 'next/router'
 const transfer = () => {
   const [recepientSelected, setRecepientSelected] = useState(false)
   const [errorAmount, setErrorAmount] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
   const users = useSelector(state => state.users)
   const profile = useSelector(state => state.profile)
   const transfer = useSelector(state => state.transfer)
@@ -44,7 +45,13 @@ const transfer = () => {
     const amount = e.target.elements['amount'].value
     if(Number(amount) > profile.balance){
       setErrorAmount(true)
-    }else{
+      setErrorMsg('Exceeding Limit!')
+    }
+    else if (Number(amount) < 1000 ){
+      setErrorAmount(true)
+      setErrorMsg('Minimal transfer is 1000')
+    }
+    else{
       const data = transfer.transferData
       data.amount = amount
       if (e.target.elements['notes'].value){
@@ -130,7 +137,7 @@ const transfer = () => {
                     name='amount'
                     placeholder='0.00'
                     className='text-center'
-                    autocomplete='off'
+                    autoComplete='off'
                     invalid={errorAmount}
                     required
                   />
@@ -144,13 +151,13 @@ const transfer = () => {
                     name='notes'
                     type='text'
                     placeholder='Add some notes'
-                    autocomplete='off'
+                    autoComplete='off'
                   />
                 </div>
                 {
                   errorAmount &&
                   <div className='error-message'>
-                    Exceeding limit!
+                    {errorMsg}
                   </div>
                 }
               </div>

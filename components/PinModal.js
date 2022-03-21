@@ -12,6 +12,7 @@ const PinModal = (props) => {
   const dispatch = useDispatch()
   const router = useRouter()
   const [isError, setIsError] = useState(false)
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -23,15 +24,33 @@ const PinModal = (props) => {
     if(transfer.transferData.notes){
       data.append('notes', transfer.transferData.notes)
     }
-    const transferRequest = await http(token).post('/transactions/transfer', data)
+    const transferRequest = await http(token).post('/transactions/transfer', data, {
+      validateStatus: (status) =>{
+        return status < 400
+      }
+    })
       .catch((error) => {
         setIsError(true)
+        setErrorMsg(error.response.data.message)
       })
     dispatch({type: "RESET_OTP"})
     if(transferRequest){
       router.push('/')
     }
   }
+
+  
+  useEffect(() => {
+    if(otp.otp.length < 6){
+      if(props.show){
+        document.getElementById("submitButton").disabled = true;
+      }
+    }else {
+      if(props.show){
+        document.getElementById("submitButton").disabled = false;
+      }
+    }
+  }, [otp])
 
   return (
     <Modal
@@ -48,16 +67,16 @@ const PinModal = (props) => {
         <p>
           Enter your 6 digits PIN for confirmation to continue transferring money. 
         </p>
+        {
+          isError &&
+          <div className="error-message text-center mb-3">
+            <strong>{errorMsg}</strong>
+          </div>
+        }
         <form onSubmit={handleSubmit}>
           <div className="mb-5">
             <PinInput/>
           </div>
-          {
-            isError &&
-            <div className="error-message">
-              <strong>{transfer.message}</strong>
-            </div>
-          }
           <div className='text-end'>
             <Button id="submitButton" className='px-3 py-2' type='submit' variant='primary' >
               Submit
