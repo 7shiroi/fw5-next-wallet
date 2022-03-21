@@ -26,16 +26,12 @@ const changepassword = () => {
       setStatus('failed')
       setErrorMsg(error.response.data.message)
     })
-    // if(request.status >= 400){
-    //   setErrorMsg(request.data.message)
-    // }
     if(request && request.status === 200){
       setStatus('success')
     }
   }
   return (
     <Layout>
-      {console.log(errorMsg)}
       <Container className='white-bg round-container py-3'>
         <div className='mb-2'>
           <strong>
