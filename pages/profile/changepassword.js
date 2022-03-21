@@ -8,6 +8,7 @@ import http from '../../helpers/http'
 
 const changepassword = () => {
   const [status, setStatus] = useState('input') //input, success, failed
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -17,16 +18,24 @@ const changepassword = () => {
     data.append('newPassword', e.target.elements['newPassword'].value)
     data.append('confirmPassword', e.target.elements['confirmPassword'].value)
 
-    const request = await http(token).post('/profile/change-password', data)
-      .catch(
-        setStatus('failed')
-      )
-    if(request){
+    const request = await http(token).patch('/profile/change-password', data, {
+      validateStatus: (status) =>{
+        return status < 400
+      }
+    }).catch((error)=>{
+      setStatus('failed')
+      setErrorMsg(error.response.data.message)
+    })
+    // if(request.status >= 400){
+    //   setErrorMsg(request.data.message)
+    // }
+    if(request && request.status === 200){
       setStatus('success')
     }
   }
   return (
     <Layout>
+      {console.log(errorMsg)}
       <Container className='white-bg round-container py-3'>
         <div className='mb-2'>
           <strong>
@@ -70,11 +79,11 @@ const changepassword = () => {
         </form>
         {
           status === 'success' &&
-          <h3>Your password has been updated!</h3>
+          <h3 className='text-center mt-4'>Your password has been updated!</h3>
         }
         {
           status === 'failed' &&
-          <h3 className='error-message'>Failed to update your password!</h3>
+          <h3 className='error-message text-center mt-4'>{errorMsg}</h3>
         }
       </Container>
     </Layout>
