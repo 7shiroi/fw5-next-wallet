@@ -5,9 +5,11 @@ import auth from './auth'
 import profile from './profile'
 import users from './users'
 import transfer from './transfer'
+import history from './history'
 
 const rootReducer = combineReducers({
   auth,
+  history,
   profile,
   register,
   otp,

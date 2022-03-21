@@ -26,6 +26,7 @@ const MenuBar = () => {
 
   const handleLogout = () => {
     dispatch({type: 'AUTH_LOGOUT'})
+    route.push('/')
   }
 
   return (
