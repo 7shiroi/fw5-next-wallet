@@ -34,7 +34,7 @@ const register = () => {
         }
       })
     }else{
-      router.push('/create_pin')
+      router.push('/create-pin')
     }
   }
 
