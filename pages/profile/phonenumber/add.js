@@ -7,7 +7,7 @@ import Button from '../../../components/Button'
 import http from '../../../helpers/http'
 import Link from 'next/link'
 
-const add = () => {
+const Add = () => {
   const [status, setStatus] = useState('input') //status: [input, added, failed]
   
   const handleSubmit = async (e) => {
@@ -95,4 +95,4 @@ const add = () => {
   )
 }
 
-export default add
+export default Add

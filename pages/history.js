@@ -6,7 +6,7 @@ import Layout from '../components/Layout'
 import { useSelector } from 'react-redux'
 import { getHistories } from '../redux/actions/history'
 
-const history = () => {
+const History = () => {
   const history = useSelector(state => state.history)
   const profile = useSelector(state => state.profile)
 
@@ -53,4 +53,4 @@ const history = () => {
   )
 }
 
-export default history
+export default History

@@ -7,7 +7,7 @@ import PinInput from '../../components/PinInput'
 import http from '../../helpers/http'
 import Link from 'next/link'
 
-const changepin = () => {
+const ChangePin = () => {
   const otp = useSelector(state => state.otp)
   const [status, setStatus] = useState('input')
   const [errorMsg, setErrorMsg] = useState('')
@@ -162,4 +162,4 @@ const changepin = () => {
   )
 }
 
-export default changepin
+export default ChangePin

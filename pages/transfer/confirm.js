@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 import Button from '../../components/Button'
 import PinModal from '../../components/PinModal'
 
-const confirm = () => {
+const Confirm = () => {
   const [modalShow, setModalShow] = useState(false);
   const transfer = useSelector(state => state.transfer)
   const profile = useSelector(state => state.profile)
@@ -99,4 +99,4 @@ const confirm = () => {
   )
 }
 
-export default confirm
+export default Confirm

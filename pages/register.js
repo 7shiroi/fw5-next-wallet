@@ -11,7 +11,7 @@ import { validateRegister } from "../redux/actions/register"
 import { useState } from "react"
 import { useRouter } from "next/router"
 
-const register = () => {
+const Register = () => {
   const router = useRouter()
   const registerState = useSelector(state => state.register)
   const dispatch = useDispatch()
@@ -109,4 +109,4 @@ const register = () => {
   )
 }
 
-export default register
+export default Register

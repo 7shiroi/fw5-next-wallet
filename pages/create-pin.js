@@ -9,7 +9,7 @@ import PinInput from "../components/PinInput"
 import { useRouter } from "next/router"
 import { registerUser } from "../redux/actions/register"
 
-const create_pin = () => {
+const CreatePin = () => {
   const registerState = useSelector(state => state.register)
   const otp = useSelector(state => state.otp.otp)
   const router = useRouter()
@@ -116,4 +116,4 @@ const create_pin = () => {
   )
 }
 
-export default create_pin
+export default CreatePin

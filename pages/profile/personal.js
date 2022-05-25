@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import Layout from '../../components/Layout'
 
-const personal = () => {
+const Personal = () => {
   const profile = useSelector(state => state.profile)
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -72,4 +72,4 @@ const personal = () => {
   )
 }
 
-export default personal
+export default Personal

@@ -9,7 +9,7 @@ import InputGroups from "../components/InputGroups"
 import http from "../helpers/http"
 import {useRouter} from "next/router"
 
-const forgotPassword = () => {
+const ForgotPassword = () => {
   const [requested, setRequested] = useState(false)
   const router = useRouter()
   const [otp, setOtp] = useState('')
@@ -173,4 +173,4 @@ const forgotPassword = () => {
   )
 }
 
-export default forgotPassword
+export default ForgotPassword

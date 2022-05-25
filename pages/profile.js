@@ -11,7 +11,7 @@ import http from '../helpers/http'
 import Link from 'next/link'
 
 
-  const profile = () => {
+  const Profile = () => {
     const profile = useSelector(state => state.profile)
     const hiddenFileInput = useRef(null)
 
@@ -96,4 +96,4 @@ import Link from 'next/link'
   )
 }
 
-export default profile
+export default Profile

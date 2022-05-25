@@ -13,7 +13,7 @@ import Button from '../components/Button'
 import Input from '../components/Input'
 import { useRouter } from 'next/router'
 
-const transfer = () => {
+const Transfer = () => {
   const [recepientSelected, setRecepientSelected] = useState(false)
   const [errorAmount, setErrorAmount] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -173,4 +173,4 @@ const transfer = () => {
   )
 }
 
-export default transfer
+export default Transfer

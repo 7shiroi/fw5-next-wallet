@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { getPhoneNumbers } from '../../redux/actions/profile'
 import http from '../../helpers/http'
 
-const phonenumber = () => {
+const PhoneNumber = () => {
   const profile = useSelector(state => state.profile)
   const dispatch = useDispatch()
   
@@ -77,4 +77,4 @@ const phonenumber = () => {
   )
 }
 
-export default phonenumber
+export default PhoneNumber

@@ -10,7 +10,7 @@ import InputGroups from "../components/InputGroups"
 import { loginAction } from "../redux/actions/auth"
 import { useRouter } from "next/router"
 
-const login = () => {
+const Login = () => {
   const [invalidCredential, setInvalidCredential] = useState()
   const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
@@ -108,4 +108,4 @@ const login = () => {
   )
 }
 
-export default login
+export default Login

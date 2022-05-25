@@ -6,7 +6,7 @@ import InputGroups from '../../components/InputGroups'
 import Button from '../../components/Button'
 import http from '../../helpers/http'
 
-const changepassword = () => {
+const ChangePassword = () => {
   const [status, setStatus] = useState('input') //input, success, failed
   const [errorMsg, setErrorMsg] = useState('')
 
@@ -86,4 +86,4 @@ const changepassword = () => {
   )
 }
 
-export default changepassword
+export default ChangePassword
