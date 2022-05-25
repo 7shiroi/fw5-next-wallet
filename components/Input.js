@@ -1,5 +1,5 @@
 import React from 'react'
-import Styles from '../styles/input.module.css'
+import Styles from '../styles/Input.module.css'
 
 const Input = ({type, name, variant='underline', invalid=false, className='', ...rest}) => {
   return (
